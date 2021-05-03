@@ -1,0 +1,27 @@
+clc; clear all; close all;
+
+uppart = [0.5] ;
+lowpart = [1 0.707 0.5] ;
+
+roots(uppart)
+roots(lowpart)
+
+[r, p, k] = residue(uppart,lowpart)
+t = 0:0.01:25 ;
+
+
+ht1 = impulse(uppart, lowpart,t);
+
+k12=abs(r(1))
+theta=angle(r(1))
+
+ht2 = 2*(0.4082)*exp(-0.3535*t).*cos(0.6124*t-1.5708) ;
+
+figure;
+subplot(211); plot(ht1);title('ht by impulse') ;
+subplot(212); plot(ht2);title('ht by expression') ;
+
+figure ; freqs(uppart,lowpart) ;
+
+k12=abs(r(1))
+theta=angle(r(1))
