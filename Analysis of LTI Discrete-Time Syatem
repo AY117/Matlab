@@ -1,0 +1,35 @@
+h_1(n)=R_10(n)=u(n)-u(n-9),x_1(n)=(0.9)^nR_20(n)
+draw h(n) and y(n)
+n=0:1:30
+R10=unitstep(n)-unitstep(n-9)
+R20=unitstep(n)-unitstep(n-19);
+h1n=R10;
+x1n=(0.9.^n).*R20;
+y1n=conv(x1n,h1n);
+ly=0:1:60;
+subplot(311);stem(n,x1n);xlabel('n');title('x1(n)');
+subplot(312);stem(n,h1n);xlabel('n');title('h1(n)');
+subplot(313);stem(ly,y1n);xlabel('n');title('y1(n)');
+
+y(n)+0.2y(n-1)-0.24y(n-2)=x(n)+x(n-1)
+x(n)=u(n),then draw h(n) and y(n) in the range of n=0~50
+clc;clear all;close all;
+n=0:50;
+uppart = [1 1];
+lowpart = [1 0.2 -0.24];
+xn=unitstep(n);
+hn1=impz(uppart,lowpart,n);
+hn2=-0.4.*(-0.6).^n+1.4.*(0.4.^n);
+
+upparty = [1 1];
+lowparty = [1 -0.8 -0.44 0.24];
+[ry py ky] = residuez(upparty,lowparty)
+yn1 = impz(upparty,lowparty,n);
+yn2 = 2.0833.*(1.^n)-0.15.*(-0.6).^n-0.9333.*(0.4.^n);
+
+subplot(211);stem(n,hn1);title('h(n)');
+subplot(212);stem(n,yn1);title('y(n)');
+
+figure;
+subplot(211);stem(n,hn2);title('h(n)_t');
+subplot(212);stem(n,yn2);title('y(n)_t');
